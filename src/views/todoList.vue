@@ -15,23 +15,29 @@
       <!-- 主体部分 -->
       <div class="list_body">
         <div class="list_info" v-for="item in infoList" :key="item.id">
-            <span class="info_msg">{{ item.msg }}</span>
-            <span class="info_status" v-if="item.isOk == true"  style="color: #5cdc9d"
-              @click="changeStatus(item)">已完成 <i class="el-icon-success"></i
-            ></span>
-            <span class="info_status" v-else style="color: red"
-             @click="changeStatus(item)" >未完成 <i class="el-icon-error"></i
-            ></span>
-            <el-button class="info_del" size="mini" round type="danger" @click="removeInfo(item)">删除</el-button>
+          <span class="info_msg">{{ item.msg }}</span>
+          <span
+            class="info_status"
+            v-if="item.isOk"
+            style="color: #5cdc9d"
+            @click="changeStatus(item)"
+            >已完成 <i class="el-icon-success"></i
+          ></span>
+          <span class="info_status" v-else style="color: red" @click="changeStatus(item)"
+            >未完成 <i class="el-icon-error"></i
+          ></span>
+          <el-button class="info_del" size="mini" round type="danger" @click="removeInfo(item)"
+            >删除</el-button
+          >
         </div>
         <div class="list_none" v-show="infoList.length === 0">666，你闲的没活吗！</div>
       </div>
       <!-- 底部 -->
       <div class="list_footer">
-        <span style="font-family: STKaiti;">{{tip}}</span>
-        <span>总数/完成：{{infoList.length}}/{{already}}</span>
+        <span style="font-family: STKaiti">{{ tip }}</span>
+        <span>总数/完成：{{ infoList.length }}/{{ already }}</span>
       </div>
-      <el-button @click="isShow=false" class="list_close" round>摆烂</el-button>
+      <el-button @click="isShow = false" class="list_close" round>摆烂</el-button>
     </div>
   </div>
 </template>
@@ -44,48 +50,46 @@ export default {
   data() {
     return {
       isShow: false,
-      info:'',
-      tipsList:[
-        '嫉妒别人，仇视异己，就等于把生命交给别人.','古之立大事者，不惟有超世之才，亦必有坚忍不拔之志。','大鹏一日同风起，扶摇直上九万里。','有遗憾是正常的。没有遗憾的人生是糊涂的人生。','恨别人，痛苦的却是自己。','儿孙自有儿孙福，莫为儿孙做远忧。','把自己的欲望降到最低点，把自己的理性升华到最高点，就是圣人。','存平等心，行方便事，则天下无事。怀慈悲心，做慈悲事，则心中太平。'
-      ]
+      info: ''
     }
   },
   computed: {
-    ...mapState('d2admin/todo',['infoList']),
-    tip: function() {
-        return this.tipsList[Math.round(Math.random()*7)]
+    ...mapState('d2admin/todo', ['infoList']),
+    ...mapState('d2admin/todo', ['tipsList']),
+    tip: function () {
+      return this.tipsList[Math.round(Math.random() * 7)]
     }
   },
-  watch:{
+  watch: {
     infoList: {
-        handler(newVal,oldVal) {
-            this.already = newVal.filter(item => item.isOk == true).length
-        },
-        immediate:true
+      handler(newVal, oldVal) {
+        this.already = newVal.filter(item => item.isOk == true).length
+      },
+      immediate: true
     }
   },
   methods: {
     addList() {
-        if(this.info.length == 0) {
-            this.$message.warning("请填写内容")
-            return
-        }
-        let id = getRandomId()
-        let newInfo = {
-            id,
-            msg: this.info,
-            isOk:false
-        }
-        this.$store.commit('d2admin/todo/addInfo',newInfo)
-        // this.infoList.push(newInfo)
-        this.info = ''
+      if (this.info.length == 0) {
+        this.$message.warning('请填写内容')
+        return
+      }
+      let id = getRandomId()
+      let newInfo = {
+        id,
+        msg: this.info,
+        isOk: false
+      }
+      this.$store.commit('d2admin/todo/addInfo', newInfo)
+      // this.infoList.push(newInfo)
+      this.info = ''
     },
     removeInfo(row) {
-        this.$store.commit('d2admin/todo/removeInfo',row)
+      this.$store.commit('d2admin/todo/removeInfo', row)
     },
     changeStatus(row) {
-        row.isOk = !row.isOk
-        this.$store.commit('d2admin/todo/changeStatus')
+      row.isOk = !row.isOk
+      this.$store.commit('d2admin/todo/changeStatus')
     }
   }
 }
@@ -123,7 +127,7 @@ export default {
   border-color: #dbcbcb;
 }
 .list_add {
-    border: none;
+  border: none;
   background-color: #dda99c;
   color: #fff;
   margin-left: 10px;
@@ -139,10 +143,10 @@ export default {
   border-radius: 25px;
 }
 .list_none {
-    position: absolute;
-    top: 50%;
-    font-size: 35px;
-    color: rgba(220, 220, 218, .7);
+  position: absolute;
+  top: 50%;
+  font-size: 35px;
+  color: rgba(220, 220, 218, 0.7);
 }
 .list_info {
   position: relative;
@@ -171,21 +175,21 @@ export default {
   user-select: none;
 }
 .list_footer {
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
-    height: 45px;
-    line-height: 45px;
-    margin: 10px 0 0 52px;
-    border-radius:25px;
-    background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  height: 45px;
+  line-height: 45px;
+  margin: 10px 0 0 52px;
+  border-radius: 25px;
+  background-color: #fff;
 }
 .list_close {
-    position: absolute;
-    bottom: 34px;
-    right: 43px;
-    background-color: #dda99c;
-    color: #fff;
-    border: none;
+  position: absolute;
+  bottom: 34px;
+  right: 43px;
+  background-color: #dda99c;
+  color: #fff;
+  border: none;
 }
 </style>
