@@ -3,6 +3,7 @@
     <div class="loginOut" @click="loginOut">退出</div>
     <div class="contain">
       <div class="portrait">
+        <div class="inside_head">女</div>
         <div class="head">
           <img src="../assets/img/cool.webp" />
         </div>
@@ -30,7 +31,9 @@ export default {
     }
   },
   methods: {
-    loginOut() {},
+    loginOut() {
+      this.$router.push('/')
+    },
     goToMenu() {
       this.$router.push('/menu')
     }
@@ -46,11 +49,12 @@ export default {
   background-size: cover;
   .loginOut {
     float: right;
-    margin:10px 10px;
+    margin: 10px 10px;
     width: 50px;
     height: 30px;
     line-height: 30px;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
+    font-size: 12px;
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
@@ -66,6 +70,14 @@ export default {
       width: 500px;
       height: 600px;
       // background: rgba(255, 255, 255, 0.7);
+      .inside_head{
+        background-color: rgb(73, 42, 42);
+        color: #fff;
+        line-height: 110px;
+        font-size: 24px;
+        font-weight: 200;
+      }
+      .inside_head,
       .head {
         width: 110px;
         height: 110px;
@@ -73,12 +85,25 @@ export default {
         margin: 10px auto;
         border: 2px solid rgb(189, 189, 189);
         overflow: hidden;
+      }
+      .head {
+        position: absolute;
+        top: 210px;
+        left: 790px;
+        transition: 0.8s;
         cursor: pointer;
+        z-index: 999;
+        &:hover {
+          // display: none;
+          transform-origin: 0 50%;
+          transform: rotateY(180deg);
+        }
         img {
           width: 100%;
           height: 100%;
         }
       }
+
       h1 {
         color: rgb(217, 217, 217);
         font-weight: 400;
