@@ -89,7 +89,7 @@ export default {
     },
     changeStatus(row) {
       row.isOk = !row.isOk
-      this.$store.commit('d2admin/todo/changeStatus')
+      this.already = this.infoList.filter(item => item.isOk == true).length
     }
   }
 }

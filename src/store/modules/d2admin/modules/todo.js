@@ -33,9 +33,6 @@ export default {
       let index = state.infoList.findIndex(item => item.id == info.id)
       state.infoList.splice(index, 1)
     },
-    changeStatus(state, info) {
-      state.already = state.infoList.filter(item => item.isOk == true).length
-    }
   },
   actions:{
     // loginOut()
