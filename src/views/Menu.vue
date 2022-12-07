@@ -19,7 +19,7 @@
       <div class="menu">
         <div class="menu_item" @click="goTolist">TODOLIST</div>
         <div class="menu_item" @click="goTolist">TODOLIST</div>
-        <div class="menu_item" @click="goTolist">TODOLIST</div>
+        <div class="menu_item" @click="$router.push('/card')">card</div>
       </div>
     </div>
   </div>
